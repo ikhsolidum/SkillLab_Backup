@@ -9,7 +9,7 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 // Access-Control headers are received during OPTIONS requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE"); // Add DELETE here
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
     exit(0);
@@ -21,11 +21,6 @@ include_once 'courseslist.php';
 $database = new Database();
 $db = $database->getConnection();
 $courseslist = new CoursesList($db);
-
-// Return all courses data
-$courses_arr = $courseslist->read();
-http_response_code(200);
-echo json_encode($courses_arr);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
