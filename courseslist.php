@@ -32,10 +32,7 @@ if (isset($data['courses']) && is_array($data['courses'])) {
         http_response_code(500);
         echo json_encode(["message" => "Failed to store courses data."]);
     }
-} else {
-    http_response_code(400);
-    echo json_encode(["message" => "Invalid input data."]);
-}
+} 
 
 class CoursesList {
     private $conn;
